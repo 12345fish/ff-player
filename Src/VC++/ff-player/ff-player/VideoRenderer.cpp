@@ -47,7 +47,7 @@ void VideoRenderer::Clear()
 
 void VideoRenderer::VideoOut(AVFrame *frame)
 {
-	uint8_t  *pixels;
+	uint8_t *pixels;
 	int pitch, size = width_ * height_;
 
 	SDL_LockTexture(texture_, NULL, (void **) &pixels, &pitch);
@@ -55,6 +55,7 @@ void VideoRenderer::VideoOut(AVFrame *frame)
 	memcpy(pixels + size, frame->data[2], size / 4);
 	memcpy(pixels + size * 5 / 4, frame->data[1], size / 4);
 	SDL_UnlockTexture(texture_);
+
 	SDL_UpdateTexture(texture_, NULL, pixels, pitch);
 
 	// refresh screen

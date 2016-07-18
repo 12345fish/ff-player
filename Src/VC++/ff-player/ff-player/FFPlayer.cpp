@@ -54,25 +54,24 @@ void FFPlayer::Open(std::string filename)
 void FFPlayer::Close()
 {
 	Stop();
+
 	audio_decoder_->Close();
 	video_decoder_->Close();
+
+	audio_renderer_->Close();
+	video_renderer_->Close();
+
 	stream_->Close();
 }
 
 void FFPlayer::Play()
 {
-	audio_renderer_->Clear();
-	video_renderer_->Clear();
 	scheduler_->Play();
 }
 
 void FFPlayer::Stop()
 {
 	scheduler_->Stop();
-	audio_decoder_->Clear();
-	video_decoder_->Clear();
-	audio_renderer_->Clear();
-	video_renderer_->Clear();
 }
 
 void FFPlayer::setAudioRenderer(AudioRendererInterface *audio_renderer)
@@ -101,10 +100,8 @@ void FFPlayer::scheduler_OnTime()
 		if (data != nullptr) audio_renderer_->AudioOut(data);
 	}
 
-	{
-		EncodedData *data = stream_->ReadVideo(audio_decoder_->getPosition());
-		if (data != nullptr) video_decoder_->Decode(data);
-	}
+	EncodedData *data = stream_->ReadVideo(audio_decoder_->getPosition());
+	if (data != nullptr) video_decoder_->Decode(data);
 }
 
 void FFPlayer::video_decoder_OnDecodeFinished(AVFrame *frame)
