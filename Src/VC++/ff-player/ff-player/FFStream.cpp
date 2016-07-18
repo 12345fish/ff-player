@@ -24,6 +24,8 @@ FFStream::~FFStream()
 
 void FFStream::Open(std::string filename)
 {
+	Clear();
+
 	if (avformat_open_input(&format_ctx_, filename.c_str(), NULL, NULL) != 0)
 		throw "FFStream::Open - avformat_open_input error!";
 
@@ -60,6 +62,23 @@ void FFStream::Close()
 		position_ = 0;
 
 		avformat_close_input(&format_ctx_);
+	}
+
+	Clear();
+}
+
+void FFStream::Clear()
+{
+	AVPacket *packet;
+
+	while (audio_buffer_->pop(packet)) {
+		av_free_packet(packet);
+		av_free(packet);
+	}
+
+	while (video_buffer_->pop(packet)) {
+		av_free_packet(packet);
+		av_free(packet);
 	}
 }
 

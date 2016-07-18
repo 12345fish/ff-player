@@ -46,7 +46,10 @@ public:
 	bool isBusy();
 	int getStreamIndex() { return stream_index_; }
 	int getPosition();
+
+	// TODO: Remove magic number
 	int getChannels() { return 2;  }
+
 	int getSampleRate() { return codec_ctx_->sample_rate; }
 };
 

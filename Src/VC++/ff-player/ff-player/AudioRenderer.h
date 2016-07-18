@@ -19,10 +19,12 @@ public:
 
 	void Open(int channle, int sample_rate);
 	void Close();
-	void Clear();
-	void AudioOut(DecodedData *data);
-	bool isBusy();
 
+	void Clear();
+
+	void AudioOut(DecodedData *data);
+public:
+	bool isBusy();
 	bool getData(void *data, int size);
 };
 

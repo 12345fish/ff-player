@@ -24,7 +24,9 @@ public:
 
 	void Open(int width, int height);
 	void Close();
+
 	void Clear();
+
 	void VideoOut(AVFrame *frame);
 };
 

@@ -28,6 +28,8 @@ public:
 	void Open(std::string filename);
 	void Close();
 
+	void Clear();
+
 	EncodedData *ReadAudio();
 
 	/**

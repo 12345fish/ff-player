@@ -37,7 +37,7 @@ public:
 	void Close();
 	void Play();
 	void Stop();
-
+public:
 	void setAudioRenderer(AudioRendererInterface *audio_renderer);
 	void setVideoRenderer(VideoRendererInterface *video_renderer);
 };

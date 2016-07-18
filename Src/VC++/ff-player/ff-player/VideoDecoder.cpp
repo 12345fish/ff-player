@@ -62,6 +62,8 @@ VideoDecoder::~VideoDecoder()
 
 void VideoDecoder::Open(void *handle)
 {
+	Clear();
+
 	AVFormatContext *format_ctx = (AVFormatContext *) handle;
 
     // TODO: 스트림이 하나가 아니거나 아예 없거나 하는 경우에 대한 처리
