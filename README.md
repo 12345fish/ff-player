@@ -4,7 +4,7 @@ FFMPEG player example
 
 ## Video tutorials (Korean version)
 
-*https://youtu.be/XL-EZuAJQwA
+* https://youtu.be/XL-EZuAJQwA
     * 개요
     * 기능 설계에 대한 설명 
     * 동적 설계(모델링)에 대한 설명
