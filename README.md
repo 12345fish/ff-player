@@ -2,7 +2,7 @@
 
 FFMPEG player example
 
-## Video tutorials (Korean version)
+## Video tutorials
 
 * https://youtu.be/XL-EZuAJQwA
     * 개요
