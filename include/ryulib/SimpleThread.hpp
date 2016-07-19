@@ -69,6 +69,13 @@ public:
 		is_terminated_ = true;
 		WakeUp();
 	}
+
+	void TerminateAndWait()
+	{
+		is_terminated_ = true;
+		WakeUp();
+		thread_.join();
+	}
 public:
 	bool isTerminated() { return is_terminated_;  }
 };

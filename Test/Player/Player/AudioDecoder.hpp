@@ -21,16 +21,9 @@ public:
 
 	void *getDecodeData()
 	{
-
+		return nullptr;
 	}
 public:
-	bool isBusy()
-	{
-
-	}
-
-	int getPosition()
-	{
-
-	}
+	bool isBusy() { return false; }
+	int getPosition() { return 0; }
 };

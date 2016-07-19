@@ -18,11 +18,11 @@ public:
 
 	void *ReadAudio()
 	{
-
+		return nullptr;
 	}
 
 	void *ReadVideo(int position)
 	{
-
+		return nullptr;
 	}
 };

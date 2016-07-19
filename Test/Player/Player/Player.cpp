@@ -2,10 +2,21 @@
 //
 
 #include "stdafx.h"
+#include "FFPlayer.hpp"
 
+FFPlayer *player;
 
 int main()
 {
-    return 0;
+	player = new FFPlayer();
+	player->Open("1.mp4");
+	player->Play();
+
+	while (true)
+	{
+
+	}
+
+	return 0;
 }
 

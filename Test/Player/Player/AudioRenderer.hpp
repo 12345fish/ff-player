@@ -20,5 +20,5 @@ public:
 
 	}
 public:
-	bool isBusy() {}
+	bool isBusy() { return false;  }
 };
