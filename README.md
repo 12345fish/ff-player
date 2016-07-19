@@ -12,3 +12,5 @@ FFMPEG player example
     * 동적 설계 (Layer #1)
 * https://youtu.be/83HOqpN0J1Q
     * 동적 설계를 코드로 옮기기
+* https://youtu.be/1hz4dOurCvY
+    * Scheduler 클래스 구현
