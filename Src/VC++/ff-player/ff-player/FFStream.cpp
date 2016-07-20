@@ -24,7 +24,7 @@ FFStream::~FFStream()
 
 void FFStream::Open(std::string filename)
 {
-	Clear();
+	Close();
 
 	if (avformat_open_input(&format_ctx_, filename.c_str(), NULL, NULL) != 0)
 		throw "FFStream::Open - avformat_open_input error!";
@@ -33,17 +33,8 @@ void FFStream::Open(std::string filename)
 		throw "FFStream::Open - avformat_find_stream_info error!";
 
 	for (int i = 0; i < format_ctx_->nb_streams; i++) {
-		if (format_ctx_->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
-			video_index_ = i;
-			break;
-		}
-	}
-
-	for (int i = 0; i < format_ctx_->nb_streams; i++) {
-		if (format_ctx_->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO) {
-			audio_index_ = i;
-			break;
-		}
+		if (format_ctx_->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) video_index_ = i;
+		if (format_ctx_->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO) audio_index_ = i;
 	}
 
 #ifdef _DEBUG
@@ -57,12 +48,10 @@ void FFStream::Open(std::string filename)
 
 void FFStream::Close()
 {
-	if (is_opened_) {
-		is_opened_ = false;
-		position_ = 0;
+	if (is_opened_) avformat_close_input(&format_ctx_);
 
-		avformat_close_input(&format_ctx_);
-	}
+	is_opened_ = false;
+	position_ = 0;
 
 	Clear();
 }
@@ -100,8 +89,9 @@ EncodedData *FFStream::ReadVideo(int position)
 	AVPacket *packet = video_buffer_->front();
 	if (packet == NULL) return nullptr;
 
-	int pos = (int) packet->pts * av_q2d(format_ctx_->streams[packet->stream_index]->time_base) * 1000;
-	if (pos < position) return nullptr;
+	int pos = packet->pts * av_q2d(format_ctx_->streams[packet->stream_index]->time_base) * 1000;
+	// TODO: 
+	//if (pos > position) return nullptr;
 
 	if (video_buffer_->pop(packet) == false) return nullptr;
 
@@ -123,7 +113,7 @@ bool FFStream::read_frame()
 		return false;
 	}
 
-	int temp = (int) packet->pts * av_q2d(format_ctx_->streams[packet->stream_index]->time_base) * 1000;
+	int temp = packet->pts * av_q2d(format_ctx_->streams[packet->stream_index]->time_base) * 1000;
 	if (temp > 0) position_ = temp;
 
 #ifdef _DEBUG

@@ -23,7 +23,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	player->setAudioRenderer(new AudioRenderer());
 	player->setVideoRenderer(new VideoRenderer());
 
-//	player.Open("rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov");
+	//player->Open("rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov");
 	player->Open(argv[1]);
 	player->Play();
 
