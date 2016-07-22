@@ -14,3 +14,5 @@ FFMPEG player example
     * 동적 설계를 코드로 옮기기
 * https://youtu.be/1hz4dOurCvY
     * Scheduler 클래스 구현
+* https://youtu.be/kjxFY_IrfzE, https://youtu.be/IeTHb39UfFI
+    * FFStream 클래스 구현
