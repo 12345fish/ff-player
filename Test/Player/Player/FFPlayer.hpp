@@ -58,7 +58,7 @@ public:
 	void Open(std::string filename)
 	{
 		stream_->Open(filename);
-		audio_decoder_->Open();
+		audio_decoder_->Open(stream_->getHandle());
 		video_decoder_->Open();
 		audio_renderer_->Open();
 		video_renderer_->Open();

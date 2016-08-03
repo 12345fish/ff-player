@@ -13,6 +13,7 @@ private:
 	std::condition_variable_any condition_;
 private:
 	SimpleThread *thread_;
+
 	void thread_OnExecute(SimpleThread *thread)
 	{
 		while (thread->isTerminated() == false) {
@@ -24,6 +25,7 @@ private:
 			if (is_running && (OnTime_ != nullptr)) OnTime_();
 		}
 	}
+
 	void thread_OnTerminated(SimpleThread *thread)
 	{
 

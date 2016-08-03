@@ -134,4 +134,6 @@ public:
 
 		return packet;
 	}
+
+	void *getHandle() { return format_ctx_;  }
 };
