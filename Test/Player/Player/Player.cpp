@@ -9,7 +9,8 @@ FFPlayer *player;
 int main()
 {
 	player = new FFPlayer();
-	player->Open("1.mp4");
+	player->Open("rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov");
+	//player->Open("1.mp4");
 	player->Play();
 
 	while (true)

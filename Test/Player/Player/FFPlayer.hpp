@@ -57,6 +57,10 @@ public:
 
 	void Open(std::string filename)
 	{
+#ifdef _DEBUG
+		printf("FFPlayer::Open - filename: %s \n", filename.c_str());
+#endif // _DEBUG
+
 		stream_->Open(filename);
 		audio_decoder_->Open(stream_->getHandle());
 		video_decoder_->Open();

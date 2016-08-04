@@ -38,7 +38,7 @@ private:
 			av_free(packet);
 		}
 
-		return false;
+		return true;
 	}
 private:
 	bool is_opened;
@@ -111,7 +111,7 @@ public:
 
 	void *ReadAudio()
 	{
-		while (audio_buffer_->is_empty() == false) {
+		while (audio_buffer_->is_empty()) {
 			if (read_frame() == false) break;
 		}
 

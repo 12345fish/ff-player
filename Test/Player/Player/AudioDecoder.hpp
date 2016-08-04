@@ -45,6 +45,10 @@ private:
 	{
 		AVPacket *packet = (AVPacket *) data;
 
+#ifdef _DEBUG
+		printf("AudioDecoder::decode_audio - packet->size: %d \n", packet->size);
+#endif // _DEBUG
+
 		int position = packet->pts * av_q2d(format_ctx_->streams[packet->stream_index]->time_base) * 1000;
 
 		AVFrame *audio_frame = av_frame_alloc();
@@ -181,6 +185,10 @@ public:
 
 	void Decode(void *data)
 	{
+#ifdef _DEBUG
+		printf("AudioDecoder::Decode -  \n");
+#endif // _DEBUG
+
 		queue_in_->push(data);
 		thread_->WakeUp();
 	}
