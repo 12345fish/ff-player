@@ -2,6 +2,9 @@
 
 FFMPEG player example
 
+Test 폴더에 있는 소스가 최신입니다.
+Src폴더 초기 소스를 녹화를 하면서 수정하고 있습니다.
+
 ## Video tutorials
 
 * 개요
