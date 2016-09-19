@@ -6,7 +6,7 @@
 
 FFPlayer *player;
 
-int main()
+int _tmain(int argc, _TCHAR* argv[])
 {
 	player = new FFPlayer();
 	player->Open("rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov");

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "FFPlayerBase.hpp"
 #include "FFStream.hpp"
 #include "Scheduler.hpp"
 #include "AudioDecoder.hpp"
@@ -25,7 +26,7 @@ private:
 		}
 
 		if (audio_renderer_->isBusy() == false) {
-			void *data = audio_decoder_->getDecodeData();
+			DecodedData *data = audio_decoder_->getDecodeData();
 			if (data != nullptr) audio_renderer_->AudioOut(data);
 		}
 
@@ -62,9 +63,11 @@ public:
 #endif // _DEBUG
 
 		stream_->Open(filename);
+
 		audio_decoder_->Open(stream_->getHandle());
 		video_decoder_->Open();
-		audio_renderer_->Open();
+
+		audio_renderer_->Open(audio_decoder_->getChannels(), audio_decoder_->getSampleRate());
 		video_renderer_->Open();
 	}
 

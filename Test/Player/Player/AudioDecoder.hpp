@@ -21,7 +21,7 @@ private:
 	AVCodec *codec_;
 	SwrContext *swr_ctx_;
 	ThreadQueue<void *> *queue_in_;
-	ThreadQueue<void *> *queue_out_;
+	ThreadQueue<DecodedData *> *queue_out_;
 	bool is_opened_;
 	int stream_index_;
 private:
@@ -77,10 +77,19 @@ private:
 						(const uint8_t **) audio_frame->extended_data, audio_frame->nb_samples
 					);
 
+#ifdef _DEBUG
+					printf("AudioDecoder::decode_audio - data_size: %d \n", data_size);
+#endif // _DEBUG
+
 					queue_out_->push(new DecodedData(buffer, data_size, position));
 				}
 				else {
 					data_size = av_samples_get_buffer_size(NULL, codec_ctx_->channels, audio_frame->nb_samples, AV_SAMPLE_FMT_S16, 1);
+
+#ifdef _DEBUG
+					printf("AudioDecoder::decode_audio - data_size: %d \n", data_size);
+#endif // _DEBUG
+
 					queue_out_->push(new DecodedData(audio_frame->data[0], data_size, position));
 				}
 			}
@@ -100,7 +109,7 @@ public:
 	AudioDecoder()
 	{
 		queue_in_  = new ThreadQueue<void *>();
-		queue_out_ = new ThreadQueue<void *>();
+		queue_out_ = new ThreadQueue<DecodedData *>();
 
 		thread_ = new SimpleThread(
 			bind(&AudioDecoder::thread_OnExecute, this, placeholders::_1),
@@ -185,21 +194,19 @@ public:
 
 	void Decode(void *data)
 	{
-#ifdef _DEBUG
-		printf("AudioDecoder::Decode -  \n");
-#endif // _DEBUG
-
 		queue_in_->push(data);
 		thread_->WakeUp();
 	}
 
-	void *getDecodeData()
+	DecodedData *getDecodeData()
 	{
-		void *data = queue_out_->pop();
+		DecodedData *data = queue_out_->pop();
 		if (data == NULL) data = nullptr;
 		return data;
 	}
 public:
 	bool isBusy() { return (queue_in_->size() + queue_out_->size()) >= BUFFER_LIMIT; }
 	int getPosition() { return 0; }
+	int getChannels() { return 2; }
+	int getSampleRate() { return codec_ctx_->sample_rate; }
 };

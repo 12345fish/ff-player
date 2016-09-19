@@ -29,7 +29,7 @@ AudioRenderer::~AudioRenderer()
 
 void AudioRenderer::Open(int channle, int sample_rate)
 {
-	Clear();
+	Close();
 
 	audio_spec.freq = sample_rate;
 	audio_spec.channels = channle;
