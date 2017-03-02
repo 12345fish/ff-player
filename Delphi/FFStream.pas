@@ -64,7 +64,7 @@ var
 begin
   FCS.Acquire;
   try
-    close_stream(FHandle);
+    if FHandle <> nil then close_stream(FHandle);
 
     FHandle := OpenStream(AFilename, iError);
     if iError <> 0 then

@@ -98,6 +98,7 @@
         <DCCReference Include="AudioDecoder.pas"/>
         <DCCReference Include="VideoDecoder.pas"/>
         <DCCReference Include="AudioRenderer.pas"/>
+        <DCCReference Include="RyuMPEG.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -126,6 +127,12 @@
             </Delphi.Personality>
             <Deployment>
                 <DeployFile LocalName="Win32\Debug\ff_player.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>ff_player.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\Bin\ff_player.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ff_player.exe</RemoteName>
                         <Overwrite>true</Overwrite>

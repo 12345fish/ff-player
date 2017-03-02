@@ -62,3 +62,7 @@ Win64
 *.sdf 
 ipch
 *.opensdf
+*.VC.db
+*.pkl
+*.tgz
+VC++/src/ff_player/ff_player.VC.VC.opendb

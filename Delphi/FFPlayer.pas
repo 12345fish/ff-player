@@ -92,6 +92,7 @@ begin
   if FAudioDecoder.IsBusy or FAudioRenderer.IsBusy then Exit;
 
   pFrame := FStream.Read;
+  if pFrame = nil then Exit;
 
   case get_frame_type(pFrame) of
     AUDIO_PACKET: FAudioDecoder.Decode(pFrame);

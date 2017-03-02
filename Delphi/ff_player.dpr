@@ -8,7 +8,8 @@ uses
   Scheduler in 'Scheduler.pas',
   AudioDecoder in 'AudioDecoder.pas',
   VideoDecoder in 'VideoDecoder.pas',
-  AudioRenderer in 'AudioRenderer.pas';
+  AudioRenderer in 'AudioRenderer.pas',
+  RyuMPEG in 'RyuMPEG.pas';
 
 {$R *.res}
 
